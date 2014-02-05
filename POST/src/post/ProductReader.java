@@ -10,6 +10,6 @@ package post;
  *
  * @author terrywong
  */
-public class SalesLineItem {
+public class ProductReader {
     
 }
