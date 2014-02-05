@@ -4,6 +4,8 @@
  */
 package post;
 
+import java.io.IOException;
+
 /**
  *
  * @author terrywong
@@ -11,17 +13,18 @@ package post;
 public class Store {
 
     private String name, address;
-    private static final String NAME = "SFSU Merchandise Store";
+    private static final String DEFAULT_NAME = "SFSU Merchandise Store";
     private static final String DEFAULT_ADDRESS = "1600 Holloway Avenue . San Francisco . CA 94132";
+    private ProductReader productCatalog;
 
     public Store() {
-        name = NAME;
+        name = DEFAULT_NAME;
         address = DEFAULT_ADDRESS;
     }
 
     public Store(String nm, String addr) {
         if (nm == null) {
-            name = NAME;
+            name = DEFAULT_NAME;
         } else {
             name = nm;
         }
@@ -29,6 +32,17 @@ public class Store {
             address = DEFAULT_ADDRESS;
         } else {
             address = addr;
+        }
+    }
+
+    public void init(String productFile) {
+        try {
+            productCatalog = new ProductReader(productFile);
+            productCatalog.loadProducts();
+            productCatalog.close();
+            System.out.print(productCatalog.toString());
+        } catch (IOException e) {
+            System.out.println("**** " + e);
         }
     }
 
@@ -52,5 +66,4 @@ public class Store {
     public void setAddress(String addr) {
         address = addr;
     }
-
 }

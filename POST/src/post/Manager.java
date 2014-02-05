@@ -1,9 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The manager will open the store, set up Post(s), put together the product catalog
  */
-
 package post;
 
 /**
@@ -11,5 +8,11 @@ package post;
  * @author terrywong
  */
 public class Manager {
-    
+
+    private Store store;
+
+    public Manager(String productFile) {
+        store = new Store();
+        store.init(productFile);
+    }
 }

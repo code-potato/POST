@@ -11,13 +11,11 @@ import java.io.IOException;
  */
 public class Product {
 
-    private String name, description;
+    private String description, UPC;
     private double price;
-    private int UPC;
     private static final int UPC_LENGTH = 4;
 
-    public Product(String nm, String desc, double p, int upc) {
-        name = nm;
+    public Product(String desc, double p, String upc) {
         description = desc;
         price = p;
         try {
@@ -28,14 +26,6 @@ public class Product {
         } catch (IOException e) {
             System.out.println("**** Invalid UPC Entry **** " + e);
         }
-    }
-
-    public void setName(String nm) {
-        name = nm;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setDescription(String desc) {
@@ -54,9 +44,9 @@ public class Product {
         return price;
     }
 
-    public void setUPC(int upc) {
+    public void setUPC(String upc) {
         try {
-            if (String.valueOf(upc).length() != UPC_LENGTH) {
+            if (upc.length() != UPC_LENGTH) {
                 throw new IOException();
             }
             UPC = upc;
@@ -65,7 +55,7 @@ public class Product {
         }
     }
 
-    public int getUPC() {
+    public String getUPC() {
         return UPC;
     }
 }
