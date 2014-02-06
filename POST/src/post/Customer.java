@@ -14,20 +14,28 @@ public class Customer {
 
     private String name;
     private static final int UPC_LENGTH = 4;
-    private HashMap<Integer, Integer> purchases;
+    private HashMap<String, Integer> purchases;
 
     public Customer(String n) {
         this.purchases = new HashMap();
         name = n;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String nm) {
+        name = nm;
+    }
+
     public HashMap getPurchases() {
         return purchases;
     }
 
-    public void setPurchases(int upc, int quantity) {
+    public void setPurchases(String upc, int quantity) {
         try {
-            if (String.valueOf(upc).length() != UPC_LENGTH) {
+            if (upc.length() != UPC_LENGTH) {
                 throw new IOException();
             }
             purchases.put(upc, quantity);

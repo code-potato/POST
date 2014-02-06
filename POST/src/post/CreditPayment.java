@@ -9,16 +9,16 @@ package post;
  *
  * @author terrywong
  */
-public class CreditPayment extends Payment {
-
-    public CreditPayment(double amount) {
-        super(amount);
-    }
+public class CreditPayment implements IPayment {
 
     /**
      *
      * @param amountPaid
      */
     public void makePayment(double amountPaid) {
+    }
+
+    public void setCreditCardNum(int creditCardNum) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

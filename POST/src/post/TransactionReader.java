@@ -16,8 +16,12 @@ import java.util.StringTokenizer;
 public class TransactionReader {
 
     private BufferedReader source;
-    protected static int lineno = -1;
-    private String nextLine, customerName, TransactionItem, Payment;
+    protected static int lineno = -1, transactionLine = 0, quantity = 0, creditCardNum;
+    private String nextLine, customerName, upc, paymentType;
+    private double amountPaid = 0;
+    private Customer customer;
+    private Transaction transaction;
+    private IPayment payment;
     private static ArrayList<String> savedTransactionFile;
     private static ArrayList<Transaction> transactions;
 
@@ -29,7 +33,6 @@ public class TransactionReader {
      */
     public TransactionReader(String transactionFile) throws IOException {
         System.out.println("Transaction File: " + transactionFile);
-        System.out.println();
         source = new BufferedReader(new FileReader(transactionFile));
         savedTransactionFile = new ArrayList<>();
         transactions = new ArrayList<>();
@@ -56,15 +59,55 @@ public class TransactionReader {
                 if (nextLine != null) {
                     savedTransactionFile.add(nextLine);
                 } else {
+                    transaction = new Transaction(customer, payment);
+                    transactions.add(transaction);
                     break;
                 }
-                if (nextLine != "") {
+                if (nextLine.equals("")) {
+                    transaction = new Transaction(customer, payment);
+                    transactions.add(transaction);
+                    transactionLine = -1;
+                } else if (transactionLine == 0) {
+                    customerName = nextLine.trim();
+                    customer = new Customer(customerName);
+                } else if (transactionLine >= 1 && !nextLine.contains("CASH") && !nextLine.contains("CHECK") && !nextLine.contains("CREDIT")) {
                     StringTokenizer st = new StringTokenizer(nextLine);
+                    if (st.hasMoreTokens()) {
+                        upc = st.nextToken();
+                    } else {
+                        throw new IOException();
+                    }
+                    if (st.hasMoreTokens()) {
+                        quantity = Integer.valueOf(st.nextToken());
+                    } else {
+                        quantity = 1;
+                    }
+                    customer.setPurchases(upc, quantity);
+                } else if (nextLine.contains("CASH") || nextLine.contains("CHECK") || nextLine.contains("CREDIT")) {
+                    StringTokenizer st = new StringTokenizer(nextLine);
+                    if (st.hasMoreTokens()) {
+                        paymentType = st.nextToken();
+                    } else {
+                        throw new IOException();
+                    }
+                    if (st.hasMoreTokens()) {
+                        if (paymentType.equalsIgnoreCase("CASH")) {
+                            amountPaid = Double.valueOf(st.nextToken().replace("$", ""));
+                            payment = new CashPayment();
+                        } else if (paymentType.equalsIgnoreCase("CHECK")) {
+                            payment = new CheckPayment();
+                        } else if (paymentType.equalsIgnoreCase("CREDIT")) {
+                            creditCardNum = Integer.valueOf(st.nextToken());
+                            payment = new CreditPayment();
+                        }
+                    } else {
+                        throw new IOException();
+                    }
                 }
-
+                transactionLine++;
             } while (nextLine != null);
         } catch (IOException e) {
-            System.out.println("**** Invalid Product Catalog Database **** " + e);
+            System.out.println("**** Invalid Transaction File **** " + e);
 
         }
     }
@@ -75,6 +118,10 @@ public class TransactionReader {
 
     public static ArrayList<String> getSavedSourceFile() {
         return savedTransactionFile;
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 
     @Override

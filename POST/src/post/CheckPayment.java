@@ -9,12 +9,9 @@ package post;
  *
  * @author terrywong
  */
-public class CashPayment implements IPayment {
+public class CheckPayment implements IPayment {
 
-    /**
-     *
-     * @param amountPaid
-     */
     public void makePayment(double amountPaid) {
+        throw new UnsupportedOperationException("This method is not supported in this subclass."); //To change body of generated methods, choose Tools | Templates.
     }
 }

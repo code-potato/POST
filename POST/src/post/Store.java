@@ -5,6 +5,7 @@
 package post;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Store {
     private String name, address;
     private static final String DEFAULT_NAME = "SFSU Merchandise Store";
     private static final String DEFAULT_ADDRESS = "1600 Holloway Avenue . San Francisco . CA 94132";
-    private ProductReader productCatalog;
+    private ProductReader productReader;
 
     public Store() {
         name = DEFAULT_NAME;
@@ -37,10 +38,10 @@ public class Store {
 
     public void init(String productFile) {
         try {
-            productCatalog = new ProductReader(productFile);
-            productCatalog.loadProducts();
-            productCatalog.close();
-            System.out.print(productCatalog.toString());
+            productReader = new ProductReader(productFile);
+            productReader.loadProducts();
+            productReader.close();
+            //System.out.print(productReader.toString());
         } catch (IOException e) {
             System.out.println("**** " + e);
         }
@@ -65,5 +66,9 @@ public class Store {
 
     public void setAddress(String addr) {
         address = addr;
+    }
+
+    public ArrayList<Product> getProductCatalog() {
+        return productReader.getProductCatalog();
     }
 }

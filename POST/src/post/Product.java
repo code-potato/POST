@@ -15,9 +15,9 @@ public class Product {
     private double price;
     private static final int UPC_LENGTH = 4;
 
-    public Product(String desc, double p, String upc) {
+    public Product(String desc, double pc, String upc) {
         description = desc;
-        price = p;
+        price = pc;
         try {
             if (String.valueOf(upc).length() != UPC_LENGTH) {
                 throw new IOException();

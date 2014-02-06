@@ -20,7 +20,7 @@ public class ProductReader {
     private String nextLine, desc, upc;
     private double price;
     private static ArrayList<String> savedProductFile;
-    private static ArrayList<Product> ProductCatalog;
+    private static ArrayList<Product> productCatalog;
 
     /**
      * Construct a new ProductReader for a product catalog.
@@ -33,7 +33,7 @@ public class ProductReader {
         System.out.println("Product Catalog File: " + productFile);
         source = new BufferedReader(new FileReader(productFile));
         savedProductFile = new ArrayList<>();
-        ProductCatalog = new ArrayList<>();
+        productCatalog = new ArrayList<>();
     }
 
     void close() {
@@ -73,7 +73,7 @@ public class ProductReader {
                         throw new IOException();
                     }
                     Product product = new Product(desc, price, upc);
-                    ProductCatalog.add(product);
+                    productCatalog.add(product);
                 }
 
             } while (nextLine != null);
@@ -83,8 +83,13 @@ public class ProductReader {
         }
     }
 
-    public ArrayList getProductCatalog() {
-        return ProductCatalog;
+    public ArrayList<Product> getProductCatalog() {
+        return productCatalog;
+    }
+
+    public void addNewProduct(String desc, double price, String upc) {
+        Product product = new Product(desc, price, upc);
+        productCatalog.add(product);
     }
 
     public static int getLineno() {

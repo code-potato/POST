@@ -3,6 +3,8 @@
  */
 package post;
 
+import java.util.Date;
+
 /**
  *
  * @author terrywong
@@ -10,9 +12,20 @@ package post;
 public class Transaction {
 
     private Customer customer;
-    Payment payment;
+    private IPayment payment;
+    private String dateTime;
 
-    public Transaction() {
+    public Transaction(Customer c, IPayment pt) {
+        customer = c;
+        payment = pt;
+        dateTime = String.format("%tc", new Date());
+    }
 
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 }
