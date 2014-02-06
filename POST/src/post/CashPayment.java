@@ -9,6 +9,7 @@ package post;
  *
  * @author terrywong
  * @author Jung Hwan Kim
+ * @author Barry Levine
  */
 public class CashPayment implements IPayment {
 
