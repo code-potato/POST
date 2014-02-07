@@ -44,7 +44,6 @@ public class Manager {
     private void generateInvoice() {
         transactions = transactionRecord.getTransactions();
         products = store.getProducts();
-        System.out.print("");
         Invoice = store.getName() + "\n\n";
         for (Transaction t : transactions) {
             Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date Time:");
