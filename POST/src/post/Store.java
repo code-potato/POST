@@ -67,7 +67,7 @@ public class Store {
         address = addr;
     }
 
-    public ArrayList<Product> getProductCatalog() {
+    public ArrayList<Product> getProducts() {
         return productCatalog.getProductCatalog();
     }
 }

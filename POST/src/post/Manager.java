@@ -19,7 +19,7 @@ public class Manager {
     private TransactionReader transactionRecord;
     private TransactionLog transactionLog;
     private ArrayList<Transaction> transactions;
-    private static ArrayList<Product> productCatalog;
+    private static ArrayList<Product> products;
     private HashMap<String, Integer> transactionPurchases;
 
     public Manager(String productFile, String transactionFile) {
@@ -43,14 +43,15 @@ public class Manager {
     // Generate a invoice for printing
     private void generateInvoice() {
         transactions = transactionRecord.getTransactions();
-        productCatalog = store.getProductCatalog();
+        products = store.getProducts();
         Invoice = store.getName() + "\n\n";
         for (Transaction t : transactions) {
-            Invoice += String.format("Customer: %-15s %-20s\n", t.getCustomer().getName(), t.getDateTime());
+            Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date Time:");
+            Invoice += String.format("%-25s %-20s\n", t.getCustomer().getName(), t.getDateTime());
             Invoice += String.format("%-12s %-12s %-12s %-12s\n", "Item:", "QTY:", "Unit Price:", "Subtotal:");
             transactionPurchases = t.getCustomer().getPurchases();
             for (Map.Entry entry : transactionPurchases.entrySet()) {
-                for (Product p : productCatalog) {
+                for (Product p : products) {
                     if (entry.getKey().equals(p.getUPC())) {
                         Invoice += String.format("%-12s %-12s %-12s %-12s\n", p.getDescription(), entry.getValue(), p.getPrice(), p.getPrice() * Double.valueOf(entry.getValue().toString()));
                     }
