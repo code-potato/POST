@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
- * This class is for initialization the product catalog
+ * This class is for initialization the product catalog.
  *
  * @author Terry Wong
  */
