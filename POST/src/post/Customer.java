@@ -18,9 +18,9 @@ public class Customer {
     // If we are going to iterate all list, we should use arraylist
     // rather than using HashMap!!!!!!!!!!!!!!!!!!!!!!!!!
     
-    public Customer(String n) {
+    public Customer(String name) {
         this.purchases = new HashMap();
-        name = n;
+        this.name = name;
     }
 
     public String getName() {
