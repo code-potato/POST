@@ -1,5 +1,5 @@
 /*
- * Read the product catalog for initialization
+ * This class is for initialization the product catalog 
  */
 package post;
 
@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
  *
  * @author terrywong
  */
-public class ProductReader {
+public class ProductCatalog {
 
     private BufferedReader source;
     private static int lineno = -1;
@@ -23,12 +23,12 @@ public class ProductReader {
     private static ArrayList<Product> productCatalog;
 
     /**
-     * Construct a new ProductReader for a product catalog.
+     * Construct a new product catalog.
      *
      * @param productFile
      * @exception IOException is thrown if there is an I/O problem
      */
-    public ProductReader(String productFile) throws IOException {
+    public ProductCatalog(String productFile) throws IOException {
         System.out.println("User Directory: " + System.getProperty("user.dir"));
         System.out.println("Product Catalog File: " + productFile);
         source = new BufferedReader(new FileReader(productFile));

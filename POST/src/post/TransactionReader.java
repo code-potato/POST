@@ -1,5 +1,5 @@
 /*
- * Execute a trasaction from file
+ * This class is for loading trasactions from a file.
  */
 package post;
 
@@ -26,13 +26,14 @@ public class TransactionReader {
     private static ArrayList<Transaction> transactions;
 
     /**
-     * Construct a new ProductReader for a product catalog.
+     * Construct a new TransactionReader for a list of transactions.
      *
      * @param transactionFile
      * @exception IOException is thrown if there is an I/O problem
      */
     public TransactionReader(String transactionFile) throws IOException {
         System.out.println("Transaction File: " + transactionFile);
+        System.out.println("");
         source = new BufferedReader(new FileReader(transactionFile));
         savedTransactionFile = new ArrayList<>();
         transactions = new ArrayList<>();
@@ -47,7 +48,7 @@ public class TransactionReader {
     }
 
     /**
-     * Load all the products from file.
+     * Load all the transactions from a file.
      *
      * @return
      */
@@ -116,7 +117,7 @@ public class TransactionReader {
         return lineno;
     }
 
-    public static ArrayList<String> getSavedSourceFile() {
+    public static ArrayList<String> getSavedTransactionFile() {
         return savedTransactionFile;
     }
 
