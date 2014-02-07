@@ -13,7 +13,7 @@ import java.util.Map;
  * @author terrywong
  */
 public class Manager {
-
+    
     private Store store;
     private String Invoice;
     private TransactionReader transactionRecord;
@@ -21,7 +21,7 @@ public class Manager {
     private ArrayList<Transaction> transactions;
     private static ArrayList<Product> products;
     private HashMap<String, Integer> transactionPurchases;
-
+    
     public Manager(String productFile, String transactionFile) {
         try {
             store = new Store();
@@ -44,6 +44,7 @@ public class Manager {
     private void generateInvoice() {
         transactions = transactionRecord.getTransactions();
         products = store.getProducts();
+        System.out.print("");
         Invoice = store.getName() + "\n\n";
         for (Transaction t : transactions) {
             Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date Time:");
@@ -64,6 +65,6 @@ public class Manager {
     // Logs an invoice for record
     private void logInvoice() {
         transactionLog = new TransactionLog();
-
+        
     }
 }
