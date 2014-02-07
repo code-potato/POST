@@ -16,7 +16,7 @@ public class Store {
     private String name, address;
     private static final String DEFAULT_NAME = "SFSU Merchandise Store";
     private static final String DEFAULT_ADDRESS = "1600 Holloway Avenue . San Francisco . CA 94132";
-    private ProductReader productReader;
+    private ProductCatalog productCatalog;
 
     public Store() {
         name = DEFAULT_NAME;
@@ -38,10 +38,9 @@ public class Store {
 
     public void init(String productFile) {
         try {
-            productReader = new ProductReader(productFile);
-            productReader.loadProducts();
-            productReader.close();
-            //System.out.print(productReader.toString());
+            productCatalog = new ProductCatalog(productFile);
+            productCatalog.loadProducts();
+            productCatalog.close();
         } catch (IOException e) {
             System.out.println("**** " + e);
         }
@@ -69,6 +68,6 @@ public class Store {
     }
 
     public ArrayList<Product> getProductCatalog() {
-        return productReader.getProductCatalog();
+        return productCatalog.getProductCatalog();
     }
 }

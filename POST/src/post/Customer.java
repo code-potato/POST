@@ -33,6 +33,7 @@ public class Customer {
         return purchases;
     }
 
+    // Set the upc and quantity pairs of a customer's purchases
     public void setPurchases(String upc, int quantity) {
         try {
             if (upc.length() != UPC_LENGTH) {

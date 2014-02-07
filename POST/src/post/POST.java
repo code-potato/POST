@@ -1,5 +1,5 @@
 /*
- * Main Class.
+ * Main class for POSTs.
  */
 package post;
 
@@ -20,6 +20,8 @@ public class POST {
     }
 
     /**
+     * Take -p <product file> -t <transaction file> as arguments
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
