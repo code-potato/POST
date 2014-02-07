@@ -67,7 +67,7 @@ public class Manager {
         transactions = transactionRecord.getTransactions();
         Invoice = store.getName() + "\n\n";
         for (Transaction t : transactions) {
-            Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date Time:");
+            Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date & Time:");
             Invoice += String.format("%-25s %-20s\n", t.getCustomer().getName(), t.getDateTime());
             Invoice += String.format("%-12s %-12s %-12s %-12s\n", "Item:", "QTY:", "Unit Price:", "Subtotal:");
             transactionPurchases = t.getCustomer().getPurchases();
