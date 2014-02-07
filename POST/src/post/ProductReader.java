@@ -32,8 +32,12 @@ public class ProductReader {
         System.out.println("User Directory: " + System.getProperty("user.dir"));
         System.out.println("Product Catalog File: " + productFile);
         source = new BufferedReader(new FileReader(productFile));
-        savedProductFile = new ArrayList<>();
-        productCatalog = new ArrayList<>();
+        if (savedProductFile == null){
+         savedProductFile = new ArrayList<>();   
+        }
+        if (productCatalog == null){
+            productCatalog = new ArrayList<>();
+        }
     }
 
     void close() {
@@ -53,7 +57,7 @@ public class ProductReader {
         try {
             do {
                 lineno++;
-                nextLine = source.readLine();
+                nextLine = source.readLine(); //reads a line from the productFile
                 if (nextLine != null) {
                     StringTokenizer st = new StringTokenizer(nextLine);
                     savedProductFile.add(nextLine);
