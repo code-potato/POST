@@ -1,13 +1,28 @@
-/*
- * This class describes a product.
+/* 
+ * Copyright (C) 2014 Terry Wong, Steven Senatori, Jung Hwan Kim
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package post;
 
 import java.io.IOException;
 
 /**
+ * This class describes a product.
  *
- * @author terrywong
+ * @author Terry Wong
  */
 public class Product {
 
@@ -15,6 +30,13 @@ public class Product {
     private double price;
     private static final int UPC_LENGTH = 4;
 
+    /**
+     * Construct a new product. Check for valid UPC entry.
+     *
+     * @param desc
+     * @param pc
+     * @param upc
+     */
     public Product(String desc, double pc, String upc) {
         description = desc;
         price = pc;
@@ -24,7 +46,7 @@ public class Product {
             }
             UPC = upc;
         } catch (IOException e) {
-            System.out.println("**** Invalid UPC Entry **** " + e);
+            System.err.println("**** Invalid UPC Entry **** " + e);
         }
     }
 
@@ -51,7 +73,7 @@ public class Product {
             }
             UPC = upc;
         } catch (IOException e) {
-            System.out.println("**** Invalid UPC Entry **** " + e);
+            System.err.println("**** Invalid UPC Entry **** " + e);
         }
     }
 

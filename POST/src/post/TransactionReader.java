@@ -1,5 +1,19 @@
-/*
- * Execute a trasaction from file
+/* 
+ * Copyright (C) 2014 Terry Wong, Steven Senatori, Jung Hwan Kim
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package post;
 
@@ -10,8 +24,9 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
+ * This class is for loading transactions from a file.
  *
- * @author terrywong
+ * @author Terry Wong
  */
 public class TransactionReader {
 
@@ -26,30 +41,33 @@ public class TransactionReader {
     private static ArrayList<Transaction> transactions;
 
     /**
-     * Construct a new ProductReader for a product catalog.
+     * Construct a new TransactionReader for a list of transactions.
      *
      * @param transactionFile
      * @exception IOException is thrown if there is an I/O problem
      */
     public TransactionReader(String transactionFile) throws IOException {
         System.out.println("Transaction File: " + transactionFile);
+        System.out.println("");
         source = new BufferedReader(new FileReader(transactionFile));
-        savedTransactionFile = new ArrayList<>();
-        transactions = new ArrayList<>();
+        if (savedTransactionFile == null) {
+            savedTransactionFile = new ArrayList<>();
+        }
+        if (transactions == null) {
+            transactions = new ArrayList<>();
+        }
     }
 
     void close() {
         try {
             source.close();
         } catch (IOException e) {
-            System.out.println("**** " + e);
+            System.err.println("**** " + e);
         }
     }
 
     /**
-     * Load all the products from file.
-     *
-     * @return
+     * Load all the transactions from a file.
      */
     public void loadTransactions() {
         try {
@@ -107,7 +125,7 @@ public class TransactionReader {
                 transactionLine++;
             } while (nextLine != null);
         } catch (IOException e) {
-            System.out.println("**** Invalid Transaction File **** " + e);
+            System.err.println("**** Invalid Transaction File **** " + e);
 
         }
     }
@@ -116,7 +134,7 @@ public class TransactionReader {
         return lineno;
     }
 
-    public static ArrayList<String> getSavedSourceFile() {
+    public static ArrayList<String> getSavedTransactionFile() {
         return savedTransactionFile;
     }
 
