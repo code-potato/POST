@@ -1,5 +1,7 @@
 /*
- * This class is for initialization the product catalog 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package post;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
+ * This class is for initialization the product catalog
  *
  * @author terrywong
  */
@@ -26,7 +29,6 @@ public class ProductCatalog {
      * Construct a new product catalog.
      *
      * @param productFile
-     * @exception IOException is thrown if there is an I/O problem
      */
     public ProductCatalog(String productFile) throws IOException {
         System.out.println("User Directory: " + System.getProperty("user.dir"));
@@ -49,9 +51,7 @@ public class ProductCatalog {
     }
 
     /**
-     * Load all the products from file.
-     *
-     * @return
+     * Load all the available products from file.
      */
     public void loadProducts() {
         try {
@@ -90,6 +90,9 @@ public class ProductCatalog {
         return productCatalog;
     }
 
+    /**
+     * Find a product by its UPC and return null if not found.
+     */
     public Product getProduct(String upc) {
         for (Product p : productCatalog) {
             if (upc.equals(p.getUPC())) {
@@ -99,6 +102,15 @@ public class ProductCatalog {
         return null;
     }
 
+    /**
+     * Add a product to the product catalog. IOException is thrown if UPC entry
+     * is invalid.
+     *
+     * @param desc
+     * @param price
+     * @param upc
+     * @throws java.io.IOException
+     */
     public void addProduct(String desc, double price, String upc) throws IOException {
         if (getProduct(upc) == null) {
             Product product = new Product(desc, price, upc);

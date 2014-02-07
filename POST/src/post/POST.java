@@ -1,9 +1,12 @@
 /*
- * Main class for POSTs.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package post;
 
 /**
+ * Main class for POSTs.
  *
  * @author terrywong
  */
@@ -20,7 +23,7 @@ public class POST {
     }
 
     /**
-     * Take -p <product file> -t <transaction file> as arguments
+     * Take -p <product file> -t <transaction file> as input arguments
      *
      * @param args the command line arguments
      */

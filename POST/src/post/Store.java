@@ -1,12 +1,14 @@
 /*
- * This class implements a store and its operations.
- *
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package post;
 
 import java.io.IOException;
 
 /**
+ * This class implements a store and its operations.
  *
  * @author terrywong
  */
@@ -35,6 +37,9 @@ public class Store {
         }
     }
 
+    /**
+     * Puts up a product catalog.
+     */
     public void init(String productFile) {
         try {
             productCatalog = new ProductCatalog(productFile);

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package post;
 
 /**
@@ -11,5 +10,5 @@ package post;
  * @author terrywong
  */
 public class TransactionLog {
-    
+
 }

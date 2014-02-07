@@ -1,11 +1,14 @@
 /*
- * This class describes a product.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package post;
 
 import java.io.IOException;
 
 /**
+ * This class describes a product.
  *
  * @author terrywong
  */
@@ -15,6 +18,13 @@ public class Product {
     private double price;
     private static final int UPC_LENGTH = 4;
 
+    /**
+     * Construct a new product. Check for valid UPC entry.
+     *
+     * @param desc
+     * @param pc
+     * @param upc
+     */
     public Product(String desc, double pc, String upc) {
         description = desc;
         price = pc;

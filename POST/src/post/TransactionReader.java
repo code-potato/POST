@@ -1,5 +1,7 @@
 /*
- * This class is for loading trasactions from a file.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package post;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
+ * This class is for loading transactions from a file.
  *
  * @author terrywong
  */
@@ -53,8 +56,6 @@ public class TransactionReader {
 
     /**
      * Load all the transactions from a file.
-     *
-     * @return
      */
     public void loadTransactions() {
         try {

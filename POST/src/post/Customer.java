@@ -1,5 +1,7 @@
 /*
- * This class describes a customer.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package post;
 
@@ -7,6 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
+ * This class describes a customer.
  *
  * @author terrywong
  */
@@ -33,7 +36,12 @@ public class Customer {
         return purchases;
     }
 
-    // Set the upc and quantity pairs of a customer's purchases
+    /**
+     * Set the UPC and quantity pairs of a customer's purchases
+     *
+     * @param upc
+     * @param quantity
+     */
     public void setPurchases(String upc, int quantity) {
         try {
             if (upc.length() != UPC_LENGTH) {

@@ -1,5 +1,7 @@
 /*
- * The manager will open the store, set up Post(s), put together the product catalog
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package post;
 
@@ -9,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * The manager will open the store, set up Post(s), put together the product
+ * catalog.
  *
  * @author terrywong
  */
@@ -22,6 +26,13 @@ public class Manager {
     private ArrayList<Transaction> transactions;
     private HashMap<String, Integer> transactionPurchases;
 
+    /**
+     * The constructor of a Manager class sets up a store and loads the record
+     * of all transactions.
+     *
+     * @param productFile
+     * @param transactionFile
+     */
     public Manager(String productFile, String transactionFile) {
         try {
             store = new Store();
@@ -33,7 +44,9 @@ public class Manager {
         }
     }
 
-    // Load transactions and print an invoice
+    /**
+     * Load transactions and print an invoice
+     */
     public void manage() {
         try {
             transactionRecord.loadTransactions();
@@ -46,7 +59,9 @@ public class Manager {
 
     }
 
-    // Generate a invoice for printing
+    /**
+     * Generate an invoice for printing
+     */
     private void generateInvoice() throws IOException {
         productCatalog = store.getProducts();
         transactions = transactionRecord.getTransactions();
@@ -68,7 +83,9 @@ public class Manager {
         }
     }
 
-    // Logs an invoice for record
+    /**
+     * Logs an invoice for record
+     */
     private void logInvoice() {
 
     }
