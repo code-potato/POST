@@ -41,7 +41,7 @@ public class Manager {
             generateInvoice();
             System.out.print(Invoice);
         } catch (IOException e) {
-            System.out.println("**** " + e);
+            System.err.println("**** " + e);
         }
 
     }

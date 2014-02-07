@@ -44,7 +44,7 @@ public class ProductCatalog {
         try {
             source.close();
         } catch (IOException e) {
-            System.out.println("**** " + e);
+            System.err.println("**** " + e);
         }
     }
 
