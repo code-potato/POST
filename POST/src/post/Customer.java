@@ -15,7 +15,9 @@ public class Customer {
     private String name;
     private static final int UPC_LENGTH = 4;
     private HashMap<String, Integer> purchases;
-
+    // If we are going to iterate all list, we should use arraylist
+    // rather than using HashMap!!!!!!!!!!!!!!!!!!!!!!!!!
+    
     public Customer(String n) {
         this.purchases = new HashMap();
         name = n;
