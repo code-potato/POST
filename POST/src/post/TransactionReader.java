@@ -35,7 +35,9 @@ public class TransactionReader {
         System.out.println("Transaction File: " + transactionFile);
         System.out.println("");
         source = new BufferedReader(new FileReader(transactionFile));
-        savedTransactionFile = new ArrayList<>();
+        if(savedTransactionFile == null)
+            savedTransactionFile = new ArrayList<>();
+        if(transactions == null)
         transactions = new ArrayList<>();
     }
 
