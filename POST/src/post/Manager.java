@@ -13,37 +13,43 @@ import java.util.Map;
  * @author terrywong
  */
 public class Manager {
-    
+
     private Store store;
     private String Invoice;
+    private ProductCatalog productCatalog;
     private TransactionReader transactionRecord;
     private TransactionLog transactionLog;
     private ArrayList<Transaction> transactions;
-    private static ArrayList<Product> products;
     private HashMap<String, Integer> transactionPurchases;
-    
+
     public Manager(String productFile, String transactionFile) {
         try {
             store = new Store();
             store.init(productFile);
             transactionRecord = new TransactionReader(transactionFile);
+            transactionLog = new TransactionLog();
         } catch (IOException e) {
-            System.out.println("**** " + e);
+            System.err.println("**** " + e);
         }
     }
 
     // Load transactions and print an invoice
     public void manage() {
-        transactionRecord.loadTransactions();
-        transactionRecord.close();
-        generateInvoice();
-        System.out.print(Invoice);
+        try {
+            transactionRecord.loadTransactions();
+            transactionRecord.close();
+            generateInvoice();
+            System.out.print(Invoice);
+        } catch (IOException e) {
+            System.out.println("**** " + e);
+        }
+
     }
 
     // Generate a invoice for printing
-    private void generateInvoice() {
+    private void generateInvoice() throws IOException {
+        productCatalog = store.getProducts();
         transactions = transactionRecord.getTransactions();
-        products = store.getProducts();
         Invoice = store.getName() + "\n\n";
         for (Transaction t : transactions) {
             Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date Time:");
@@ -51,10 +57,11 @@ public class Manager {
             Invoice += String.format("%-12s %-12s %-12s %-12s\n", "Item:", "QTY:", "Unit Price:", "Subtotal:");
             transactionPurchases = t.getCustomer().getPurchases();
             for (Map.Entry entry : transactionPurchases.entrySet()) {
-                for (Product p : products) {
-                    if (entry.getKey().equals(p.getUPC())) {
-                        Invoice += String.format("%-12s %-12s %-12s %-12s\n", p.getDescription(), entry.getValue(), p.getPrice(), p.getPrice() * Double.valueOf(entry.getValue().toString()));
-                    }
+                Product product = productCatalog.getProduct(entry.getKey().toString());
+                if (product != null) {
+                    Invoice += String.format("%-12s %-12s %-12s %-12s\n", product.getDescription(), entry.getValue(), product.getPrice(), product.getPrice() * Double.valueOf(entry.getValue().toString()));
+                } else {
+                    throw new IOException("**** UPC already exists! ****");
                 }
             }
             Invoice += "\n";
@@ -63,7 +70,6 @@ public class Manager {
 
     // Logs an invoice for record
     private void logInvoice() {
-        transactionLog = new TransactionLog();
-        
+
     }
 }

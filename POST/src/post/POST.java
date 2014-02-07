@@ -25,9 +25,8 @@ public class POST {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //System.out.println(args.length);
         if (args.length == 0 || args.length != 4) {
-            System.out.println("**** Incorrect usage, try: java post.POST -p <product file> -t <transaction file>");
+            System.err.println("**** Incorrect usage, try: java post.POST -p <product file> -t <transaction file>");
             System.exit(1);
         }
         if (args[0].equals("-p") && args[2].equals("-t")) {

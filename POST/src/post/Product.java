@@ -24,7 +24,7 @@ public class Product {
             }
             UPC = upc;
         } catch (IOException e) {
-            System.out.println("**** Invalid UPC Entry **** " + e);
+            System.err.println("**** Invalid UPC Entry **** " + e);
         }
     }
 
@@ -51,7 +51,7 @@ public class Product {
             }
             UPC = upc;
         } catch (IOException e) {
-            System.out.println("**** Invalid UPC Entry **** " + e);
+            System.err.println("**** Invalid UPC Entry **** " + e);
         }
     }
 

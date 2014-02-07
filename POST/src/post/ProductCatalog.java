@@ -32,10 +32,10 @@ public class ProductCatalog {
         System.out.println("User Directory: " + System.getProperty("user.dir"));
         System.out.println("Product Catalog File: " + productFile);
         source = new BufferedReader(new FileReader(productFile));
-        if (savedProductFile == null){
-         savedProductFile = new ArrayList<>();   
+        if (savedProductFile == null) {
+            savedProductFile = new ArrayList<>();
         }
-        if (productCatalog == null){
+        if (productCatalog == null) {
             productCatalog = new ArrayList<>();
         }
     }
@@ -76,13 +76,12 @@ public class ProductCatalog {
                     } else {
                         throw new IOException();
                     }
-                    Product product = new Product(desc, price, upc);
-                    productCatalog.add(product);
+                    addProduct(desc, price, upc);
                 }
 
             } while (nextLine != null);
         } catch (IOException e) {
-            System.out.println("**** Invalid Product Catalog Database **** " + e);
+            System.err.println("**** Invalid Product Catalog Database **** " + e);
 
         }
     }
@@ -91,16 +90,29 @@ public class ProductCatalog {
         return productCatalog;
     }
 
-    public void addNewProduct(String desc, double price, String upc) {
-        Product product = new Product(desc, price, upc);
-        productCatalog.add(product);
+    public Product getProduct(String upc) {
+        for (Product p : productCatalog) {
+            if (upc.equals(p.getUPC())) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void addProduct(String desc, double price, String upc) throws IOException {
+        if (getProduct(upc) == null) {
+            Product product = new Product(desc, price, upc);
+            productCatalog.add(product);
+        } else {
+            throw new IOException("**** UPC already exists! ****");
+        }
     }
 
     public static int getLineno() {
         return lineno;
     }
 
-    public static ArrayList<String> getSavedSourceFile() {
+    public static ArrayList<String> getSavedProductFile() {
         return savedProductFile;
     }
 

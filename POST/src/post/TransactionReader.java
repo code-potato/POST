@@ -35,17 +35,19 @@ public class TransactionReader {
         System.out.println("Transaction File: " + transactionFile);
         System.out.println("");
         source = new BufferedReader(new FileReader(transactionFile));
-        if(savedTransactionFile == null)
+        if (savedTransactionFile == null) {
             savedTransactionFile = new ArrayList<>();
-        if(transactions == null)
-        transactions = new ArrayList<>();
+        }
+        if (transactions == null) {
+            transactions = new ArrayList<>();
+        }
     }
 
     void close() {
         try {
             source.close();
         } catch (IOException e) {
-            System.out.println("**** " + e);
+            System.err.println("**** " + e);
         }
     }
 
@@ -110,7 +112,7 @@ public class TransactionReader {
                 transactionLine++;
             } while (nextLine != null);
         } catch (IOException e) {
-            System.out.println("**** Invalid Transaction File **** " + e);
+            System.err.println("**** Invalid Transaction File **** " + e);
 
         }
     }

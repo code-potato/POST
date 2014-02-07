@@ -41,7 +41,7 @@ public class Customer {
             }
             purchases.put(upc, quantity);
         } catch (IOException e) {
-            System.out.println("**** Invalid UPC Entry **** " + e);
+            System.err.println("**** Invalid UPC Entry **** " + e);
         }
     }
 }

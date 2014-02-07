@@ -5,7 +5,6 @@
 package post;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -42,7 +41,7 @@ public class Store {
             productCatalog.loadProducts();
             productCatalog.close();
         } catch (IOException e) {
-            System.out.println("**** " + e);
+            System.err.println("**** " + e);
         }
     }
 
@@ -67,7 +66,7 @@ public class Store {
         address = addr;
     }
 
-    public ArrayList<Product> getProducts() {
-        return productCatalog.getProductCatalog();
+    public ProductCatalog getProducts() {
+        return productCatalog;
     }
 }
