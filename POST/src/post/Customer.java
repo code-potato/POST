@@ -43,8 +43,8 @@ public class Customer {
         return name;
     }
 
-    public void setName(String nm) {
-        name = nm;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public HashMap getPurchases() {
@@ -68,4 +68,3 @@ public class Customer {
         }
     }
 }
-
