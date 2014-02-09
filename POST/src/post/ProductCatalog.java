@@ -63,7 +63,7 @@ public class ProductCatalog {
     }
 
     /**
-     * Load all the available products from file.
+     * Parses all the available products from file and loads them into a container.
      */
     public void loadProducts() {
         try {
@@ -72,7 +72,7 @@ public class ProductCatalog {
                 nextLine = source.readLine(); //reads a line from the productFile
                 if (nextLine != null) {
                     StringTokenizer st = new StringTokenizer(nextLine);
-                    savedProductFile.add(nextLine);
+                    savedProductFile.add(nextLine);  //adds entire product row to ArrayList as a string
                     if (st.hasMoreTokens()) {
                         upc = st.nextToken();
                     } else {

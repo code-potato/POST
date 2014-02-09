@@ -50,6 +50,7 @@ public class TransactionReader {
         System.out.println("Transaction File: " + transactionFile);
         System.out.println("");
         source = new BufferedReader(new FileReader(transactionFile));
+        //initializes the static ArrayLists iff they haven't been initialized
         if (savedTransactionFile == null) {
             savedTransactionFile = new ArrayList<>();
         }
