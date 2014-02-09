@@ -51,6 +51,8 @@ public class Store {
 
     /**
      * Puts up a product catalog.
+     *
+     * @param productFile
      */
     public void init(String productFile) {
         try {

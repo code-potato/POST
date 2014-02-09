@@ -64,7 +64,10 @@ public class Manager {
             transactionRecord.loadTransactions();
             transactionRecord.close();
             generateInvoice();
+            System.out.println("INVOICE PRINTED:");
+            System.out.println("______________________________________________________\n");
             System.out.print(Invoice);
+            System.out.println("______________________________________________________\n");
         } catch (IOException e) {
             System.err.println("**** " + e);
         }
@@ -77,10 +80,11 @@ public class Manager {
     private void generateInvoice() throws IOException {
         productCatalog = store.getProducts();
         transactions = transactionRecord.getTransactions();
-        Invoice = store.getName() + "\n\n";
+        Invoice = store.getName() + "\n";
+        Invoice += "______________________________________________________\n\n";
         for (Transaction t : transactions) {
             Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date & Time:");
-            Invoice += String.format("%-25s %-20s\n", t.getCustomer().getName(), t.getDateTime());
+            Invoice += String.format("%-25s %-20s\n\n", t.getCustomer().getName(), t.getDateTime());
             Invoice += String.format("%-12s %-12s %-12s %-12s\n", "Item:", "QTY:", "Unit Price:", "Subtotal:");
             transactionPurchases = t.getCustomer().getPurchases();
             for (Map.Entry entry : transactionPurchases.entrySet()) {
@@ -91,6 +95,8 @@ public class Manager {
                     throw new IOException("**** UPC already exists! ****");
                 }
             }
+            Invoice += "------------------------------------------------------\n";
+            Invoice += "******************************************************\n";
             Invoice += "\n";
         }
     }
