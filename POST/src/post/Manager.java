@@ -17,6 +17,8 @@
  */
 package post;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +33,7 @@ import java.util.Map;
 public class Manager {
 
     private Store store;
-    private String Invoice;
+    private String Invoice = "";
     private ProductCatalog productCatalog;
     private TransactionReader transactionRecord;
     private TransactionLog transactionLog;
@@ -65,9 +67,8 @@ public class Manager {
             transactionRecord.close();
             generateInvoice();
             System.out.println("INVOICE PRINTED:");
-            System.out.println("______________________________________________________\n");
             System.out.print(Invoice);
-            System.out.println("______________________________________________________\n");
+            logInvoice();
         } catch (IOException e) {
             System.err.println("**** " + e);
         }
@@ -80,7 +81,8 @@ public class Manager {
     private void generateInvoice() throws IOException {
         productCatalog = store.getProducts();
         transactions = transactionRecord.getTransactions();
-        Invoice = store.getName() + "\n";
+        Invoice += "______________________________________________________\n\n";
+        Invoice += store.getName() + "\n";
         Invoice += "______________________________________________________\n\n";
         for (Transaction t : transactions) {
             Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date & Time:");
@@ -96,15 +98,21 @@ public class Manager {
                 }
             }
             Invoice += "------------------------------------------------------\n";
-            Invoice += "******************************************************\n";
-            Invoice += "\n";
+            Invoice += "******************************************************\n\n";
         }
+        Invoice += "______________________________________________________\n";
     }
 
     /**
      * Logs an invoice for record
      */
-    private void logInvoice() {
-
+    private synchronized void logInvoice() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("invoice.txt", false));
+            writer.write(Invoice);
+            writer.close();
+        } catch (IOException e) {  // if there is an error in writing the file
+            System.err.println(e.getMessage());
+        }
     }
 }
