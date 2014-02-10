@@ -94,7 +94,7 @@ public class Manager {
                 if (product != null) {
                     Invoice += String.format("%-12s %-12s %-12s %-12s\n", product.getDescription(), entry.getValue(), product.getPrice(), product.getPrice() * Double.valueOf(entry.getValue().toString()));
                 } else {
-                    throw new IOException("**** UPC already exists! ****");
+                    throw new IOException("**** UPC doesn't exist! ****");
                 }
             }
             Invoice += "------------------------------------------------------\n";
