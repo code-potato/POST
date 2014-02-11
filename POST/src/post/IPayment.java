@@ -20,9 +20,9 @@ package post;
 /**
  * This is an interface for payment methods.
  *
- * @author terrywong
+ * @author Terry Wong
  */
 public interface IPayment {
 
-    public void makePayment(double amountPaid);
+    public String statePayment();
 }

@@ -85,33 +85,39 @@ public class Manager {
         Invoice += store.getName() + "\n";
         Invoice += "______________________________________________________\n\n";
         for (Transaction t : transactions) {
-            
-            double purchase_total=0.;
-            
+            double purchaseTotal = 0.;
             Invoice += String.format("%-25s %-20s\n", "Customer Name:", "Date & Time:");
             Invoice += String.format("%-25s %-20s\n\n", t.getCustomer().getName(), t.getDateTime());
             Invoice += String.format("%-12s %-12s %-12s %-12s\n", "Item:", "QTY:", "Unit Price:", "Subtotal:");
             transactionPurchases = t.getCustomer().getPurchases();
             //each entry is a purchase
             for (Map.Entry entry : transactionPurchases.entrySet()) //entry iterates through each customer object's purchases 
-            { 
+            {
                 Product product = productCatalog.getProduct(entry.getKey().toString()); //doing product lookup
                 if (product != null) {
-                   
-                  
-                   double quantity= Double.valueOf(entry.getValue().toString());
-                   purchase_total += product.getPrice() * quantity;
-                    
-                    Invoice += String.format("%-12s %-12s %-12s %-12s\n", product.getDescription(), entry.getValue(), product.getPrice(), product.getPrice() * quantity);
+                    int quantity = Integer.valueOf(entry.getValue().toString());
+                    purchaseTotal += product.getPrice() * quantity;
+                    Invoice += String.format("%-12s %-12s %-12s %-12.2f\n", product.getDescription(), entry.getValue(), product.getPrice(), product.getPrice() * quantity);
                 } else {
                     throw new IOException("**** UPC doesn't exist! ****");
                 }
             }
-            
-            Invoice += "\nTotal:\n";
-            Invoice += String.format("%.2f\n", purchase_total);
             Invoice += "------------------------------------------------------\n";
-            Invoice += "******************************************************\n\n";
+            Invoice += String.format("Total: %.2f\n", purchaseTotal);
+            // Use dynamic binding for getting the correct payment statement
+            IPayment payment = t.getPayment();
+            if (payment instanceof CashPayment) {
+                CashPayment cashPayment = (CashPayment) payment;
+                cashPayment.setAmountDue(purchaseTotal);
+                Invoice += cashPayment.statePayment();
+            } else if (payment instanceof CheckPayment) {
+                CheckPayment checkPayment = (CheckPayment) payment;
+                Invoice += checkPayment.statePayment();
+            } else if (payment instanceof CreditPayment) {
+                CreditPayment creditPayment = (CreditPayment) payment;
+                Invoice += creditPayment.statePayment();
+            }
+            Invoice += "\n******************************************************\n\n";
         }
         Invoice += "______________________________________________________\n";
     }

@@ -19,30 +19,46 @@ package post;
 
 /**
  *
- * @author terrywong
+ * @author Steven Senatori
  */
 public class CheckPayment implements IPayment {
-    
-    double amountPaid;
-    
+
+    private double amountPaid;
+
     /**
-     * 
-     * @param amountPaid 
+     *
+     * @param amountPaid
      */
-    public CheckPayment(double amountPaid){
-        this.amountPaid= amountPaid;
+    public CheckPayment(double amountPaid) {
+        this.amountPaid = amountPaid;
     }
 
-    public void makePayment(double amountPaid) {
-        throw new UnsupportedOperationException("This method is not supported in this subclass."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     /**
-     * The spec says it should do an authorization check on cards and checks. What that entails, who knows
-     * @return nothing. it's unimplemented as of now 
+     *
+     * @return
      */
-    boolean authorizationCheck(){
+    @Override
+    public String statePayment() {
+        String paymentStatement = "Paid by check\n";
+
+        return paymentStatement;
+    }
+
+    /**
+     * The spec says it should do an authorization check on cards and checks.
+     * What that entails, who knows
+     *
+     * @return nothing. it's unimplemented as of now
+     */
+    boolean checkAuthorization() {
         throw new UnsupportedOperationException("authorizationCheck method is currently not supported.");
     }
-            
+
+    public double getAmountPaid() {
+        return amountPaid;
+    }
+
+    public void setAmountPaid(double amountPaid) {
+        this.amountPaid = amountPaid;
+    }
 }

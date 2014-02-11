@@ -19,24 +19,32 @@ package post;
 
 /**
  *
- * @author terrywong
+ * @author Steven Senatori
  */
 public class CreditPayment implements IPayment {
 
-    int creditCardNum;
-    public CreditPayment(int creditCardNum){
-        this.creditCardNum= creditCardNum;
+    private int creditCardNum;
+
+    public CreditPayment(int creditCardNum) {
+        this.creditCardNum = creditCardNum;
     }
-    
-    
+
     /**
      *
-     * @param amountPaid
+     * @return
      */
-    public void makePayment(double amountPaid) {
+    @Override
+    public String statePayment() {
+        String paymentStatement = "Credit Card " + creditCardNum + "\n";
+
+        return paymentStatement;
+    }
+
+    public int getCreditCardNum() {
+        return creditCardNum;
     }
 
     public void setCreditCardNum(int creditCardNum) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.creditCardNum = creditCardNum;
     }
 }

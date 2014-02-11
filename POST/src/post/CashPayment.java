@@ -17,24 +17,56 @@
  */
 package post;
 
+import java.io.IOException;
+
 /**
  *
- * @author terrywong
- * @author Jung Hwan Kim 
+ * @author Terry Wong
+ * @author Jung Hwan Kim
  * @author Steven Senatori
-  
+ *
  */
 public class CashPayment implements IPayment {
 
-    double amountPaid;
-    
-    public CashPayment(double amountPaid){
-        this.amountPaid= amountPaid;
+    private double amountPaid, amountDue, amountReturned;
+
+    public CashPayment(double amountPaid) {
+        this.amountPaid = amountPaid;
     }
+
     /**
      *
-     * @param amountPaid
+     * @return
      */
-    public void makePayment(double amountPaid) {
+    @Override
+    public String statePayment() {
+        String paymentStatement = "";
+        try {
+            amountReturned = amountPaid - amountDue;
+            if (amountReturned < 0) {
+                throw new IOException();
+            }
+            paymentStatement += String.format("Amount Tendered: %.2f\n", amountPaid);
+            paymentStatement += String.format("Amount Returned: %.2f\n", amountReturned);
+        } catch (IOException e) {
+            System.err.println("**** Paid amount is not enough! **** " + e);
+        }
+        return paymentStatement;
+    }
+
+    public double getAmountDue() {
+        return amountDue;
+    }
+
+    public void setAmountDue(double amountDue) {
+        this.amountDue = amountDue;
+    }
+
+    public double getAmountPaid() {
+        return amountPaid;
+    }
+
+    public void setAmountPaid(double amountPaid) {
+        this.amountPaid = amountPaid;
     }
 }
