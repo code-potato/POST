@@ -23,6 +23,10 @@ package post;
  */
 public class CreditPayment implements IPayment {
 
+    int creditCardNum;
+    public CreditPayment(int creditCardNum){
+        this.creditCardNum= creditCardNum;
+    }
     
     
     /**
