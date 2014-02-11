@@ -87,7 +87,7 @@ public class Manager {
             Invoice += String.format("%-25s %-20s\n\n", t.getCustomer().getName(), t.getDateTime());
             Invoice += String.format("%-12s %-12s %-12s %-12s\n", "Item:", "QTY:", "Unit Price:", "Subtotal:");
             transactionPurchases = t.getCustomer().getPurchases();
-            for (Map.Entry entry : transactionPurchases.entrySet()) {
+            for (Map.Entry entry : transactionPurchases.entrySet()) { //entry iterates through each customer obj
                 Product product = productCatalog.getProduct(entry.getKey().toString());
                 if (product != null) {
                     Invoice += String.format("%-12s %-12s %-12s %-12s\n", product.getDescription(), entry.getValue(), product.getPrice(), product.getPrice() * Double.valueOf(entry.getValue().toString()));

@@ -31,7 +31,8 @@ import java.util.StringTokenizer;
 public class TransactionReader {
 
     private BufferedReader source;
-    protected static int lineno = -1, transactionLine = 0, quantity = 0, creditCardNum;
+    protected static int lineno = -1, transactionLine = 0, quantity = 0;
+    protected int creditCardNum;
     private String nextLine, customerName, upc, paymentType;
     private double amountPaid = 0;
     private Customer customer;
@@ -112,12 +113,13 @@ public class TransactionReader {
                     if (st.hasMoreTokens()) {
                         if (paymentType.equalsIgnoreCase("CASH")) {
                             amountPaid = Double.valueOf(st.nextToken().replace("$", ""));
-                            payment = new CashPayment();
+                            payment = new CashPayment(amountPaid);
                         } else if (paymentType.equalsIgnoreCase("CHECK")) {
-                            payment = new CheckPayment();
+                            amountPaid = Double.valueOf(st.nextToken().replace("$", ""));
+                            payment = new CheckPayment(amountPaid);
                         } else if (paymentType.equalsIgnoreCase("CREDIT")) {
                             creditCardNum = Integer.valueOf(st.nextToken());
-                            payment = new CreditPayment();
+                            payment = new CreditPayment(creditCardNum);
                         }
                     } else {
                         throw new IOException();

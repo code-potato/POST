@@ -28,6 +28,16 @@ public class Transaction {
 
     private Customer customer;
     private IPayment payment;
+
+    /**
+     * Getter for payment. USed for invoice purposes. 
+     * @return IPayment parent object
+     * 
+     */
+    public IPayment getPayment(){
+        return payment;
+    }
+    
     private String dateTime;
 
     public Transaction(Customer c, IPayment pt) {

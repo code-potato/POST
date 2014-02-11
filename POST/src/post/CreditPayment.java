@@ -23,6 +23,8 @@ package post;
  */
 public class CreditPayment implements IPayment {
 
+    
+    
     /**
      *
      * @param amountPaid
