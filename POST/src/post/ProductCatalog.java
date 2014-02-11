@@ -41,6 +41,7 @@ public class ProductCatalog {
      * Construct a new product catalog.
      *
      * @param productFile
+     * @throws java.io.IOException
      */
     public ProductCatalog(String productFile) throws IOException {
         System.out.println("User Directory: " + System.getProperty("user.dir"));
@@ -63,7 +64,8 @@ public class ProductCatalog {
     }
 
     /**
-     * Parses all the available products from file and loads them into a container.
+     * Parses all the available products from file and loads them into a
+     * container.
      */
     public void loadProducts() {
         try {
@@ -104,6 +106,9 @@ public class ProductCatalog {
 
     /**
      * Find a product by its UPC and return null if not found.
+     *
+     * @param upc
+     * @return
      */
     public Product getProduct(String upc) {
         for (Product p : productCatalog) {
